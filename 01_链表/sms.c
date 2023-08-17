@@ -36,6 +36,7 @@ void run()
             break;
         case '5':
             // 浏览
+            printf("%s\t%s\t%s\t%s\t%s\t%s\n", "学号", "姓名", "班级", "C语言", "数学", "英语");
             travel_student();
             system("read -p \"按回车继续\"");
             break;
@@ -112,21 +113,50 @@ void delete_student()
 
 void search_student()
 {
+    while (1)
+    {
+        system("clear");
+        search_menu();
+        char c;
+        scanf("%c", &c);
+        switch (c)
+        {
+        case '1':
+            search_by_id();
+            break;
+        case '2':
+            search_by_name();
+            break;
+        case '3':
+            search_by_class();
+            break;
+        case '0':
+            return;
+        }
+    }
 }
 
 void modify_student()
 {
-}
-
-void travel_student()
-{
-    for_each(list, print);
-}
-
-void print(void *data)
-{
-    Student stu = *(Student *)data;
-    printf("%d %s %s %.2lf %.2lf %.2lf\n", stu.id, stu.name, stu.cls, stu.c_score, stu.math, stu.english);
+    while (1)
+    {
+        system("clear");
+        modify_menu();
+        char c;
+        scanf("%c", &c);
+        switch (c)
+        {
+        case '1':
+            // 查找学生学号
+            modify_by_id();
+            break;
+        case '2':
+            modify_by_name();
+            break;
+        case '0':
+            return;
+        }
+    }
 }
 
 int cmp_by_id(void *dest, void *src)
@@ -135,12 +165,14 @@ int cmp_by_id(void *dest, void *src)
     unsigned int id = *(unsigned int *)src;
     return stu->id - id;
 }
+
 int cmp_by_name(void *dest, void *src)
 {
     Student *stu = (Student *)dest;
     char *name = (char *)src;
     return strcmp(stu->name, name);
 }
+
 int cmp_by_class(void *dest, void *src)
 {
     Student *stu = (Student *)dest;
@@ -170,6 +202,252 @@ void delete_by_class()
     printf("请输入要删除学生的班级: ");
     scanf("%s", cls);
     pop_key(list, cls, cmp_by_class);
+}
+
+void search_by_id()
+{
+    unsigned int id;
+    printf("请输入要查找学生的学号: ");
+    scanf("%u", &id);
+    find_all(list, &id, cmp_by_id, print);
+    system("read -p \"按回车继续\"");
+}
+
+void search_by_name()
+{
+    char name[64];
+    printf("请输入要查找学生的姓名: ");
+    scanf("%s", name);
+    find_all(list, name, cmp_by_name, print);
+    system("read -p \"按回车继续\"");
+}
+
+void search_by_class()
+{
+    char cls[64];
+    printf("请输入要查找学生的班级: ");
+    scanf("%s", cls);
+    find_all(list, cls, cmp_by_class, print);
+    system("read -p \"按回车继续\"");
+}
+
+void modify_by_id()
+{
+    unsigned int old_id;
+    printf("请输入要修改学生的id: ");
+    scanf("%u", &old_id);
+    while (1)
+    {
+        system("clear");
+        alter_menu();
+        char c;
+        scanf("%c", &c);
+        switch (c)
+        {
+        case '1':
+            alter_id(old_id);
+            break;
+        case '2':
+            alter_name(old_id);
+            break;
+        case '3':
+            alter_class(old_id);
+            break;
+        case '4':
+            alter_c_score(old_id);
+            break;
+        case '5':
+            alter_math(old_id);
+            break;
+        case '6':
+            alter_english(old_id);
+            break;
+        case '0':
+            return;
+        }
+    }
+}
+
+void modify_by_name()
+{
+    char old_name[64];
+    printf("请输入要修改学生的姓名: ");
+    scanf("%s", old_name);
+    while (1)
+    {
+        system("clear");
+        chg_menu();
+        char c;
+        scanf("%c", &c);
+        switch (c)
+        {
+        case '1':
+            chg_id(old_name);
+            break;
+        case '2':
+            chg_name(old_name);
+            break;
+        case '3':
+            chg_class(old_name);
+            break;
+        case '4':
+            chg_c_score(old_name);
+            break;
+        case '5':
+            chg_math(old_name);
+            break;
+        case '6':
+            chg_english(old_name);
+            break;
+        case '0':
+            return;
+        }
+    }
+}
+
+void opt_id(void *dest, void *src)
+{
+    Student *stu = (Student *)dest;
+    unsigned int id = *(unsigned int *)src;
+    stu->id = id;
+}
+
+void opt_name(void *dest, void *src)
+{
+    Student *stu = (Student *)dest;
+    char *name = (char *)src;
+    strcpy(stu->name, name);
+}
+
+void opt_class(void *dest, void *src)
+{
+    Student *stu = (Student *)dest;
+    char *class = (char *)src;
+    strcpy(stu->cls, class);
+}
+
+void opt_c_score(void *dest, void *src)
+{
+    Student *stu = (Student *)dest;
+    double c_score = *(double *)src;
+    stu->c_score = c_score;
+}
+
+void opt_math(void *dest, void *src)
+{
+    Student *stu = (Student *)dest;
+    double math = *(double *)src;
+    stu->math = math;
+}
+
+void opt_english(void *dest, void *src)
+{
+    Student *stu = (Student *)dest;
+    double english = *(double *)src;
+    stu->english = english;
+}
+
+// 修改学号
+void alter_id(unsigned int old_id)
+{
+    printf("请输入新的学号: ");
+    unsigned int new_id;
+    scanf("%u", &new_id);
+    alter_all(list, &new_id, &old_id, cmp_by_id, opt_id);
+}
+
+void alter_name(unsigned int old_id)
+{
+    printf("请输入新的姓名: ");
+    char name[64];
+    scanf("%s", name);
+    alter_all(list, name, &old_id, cmp_by_id, opt_name);
+}
+
+void alter_class(unsigned int old_id)
+{
+    printf("请输入新的班级: ");
+    char cls[64];
+    scanf("%s", cls);
+    alter_all(list, cls, &old_id, cmp_by_id, opt_class);
+}
+
+void alter_c_score(unsigned int old_id)
+{
+    printf("请输入新的C语言成绩: ");
+    double c_score;
+    scanf("%lf", &c_score);
+    alter_all(list, &c_score, &old_id, cmp_by_id, opt_c_score);
+}
+
+void alter_math(unsigned int old_id)
+{
+    printf("请输入新的数学成绩: ");
+    double math;
+    scanf("%lf", &math);
+    alter_all(list, &math, &old_id, cmp_by_id, opt_math);
+}
+
+void alter_english(unsigned int old_id)
+{
+    printf("请输入新的英语成绩: ");
+    double english;
+    scanf("%lf", &english);
+    alter_all(list, &english, &old_id, cmp_by_id, opt_english);
+}
+
+void chg_id(char *name)
+{
+    printf("请输入新的学号: ");
+    unsigned int id;
+    scanf("%u", &id);
+    alter_all(list, &id, name, cmp_by_name, opt_id);
+}
+
+void chg_name(char *name)
+{
+    printf("请输入新的姓名: ");
+    char new_name[64];
+    scanf("%s", new_name);
+    alter_all(list, new_name, name, cmp_by_name, opt_name);
+}
+
+void chg_class(char *name)
+{
+    printf("请输入新的班级: ");
+    char new_class[64];
+    scanf("%s", new_class);
+    alter_all(list, new_class, name, cmp_by_name, opt_class);
+}
+void chg_c_score(char *name)
+{
+    printf("请输入新的C语言成绩: ");
+    double new_c_score;
+    scanf("%lf", &new_c_score);
+    alter_all(list, &new_c_score, name, cmp_by_name, opt_c_score);
+}
+
+void chg_math(char *name)
+{
+    printf("请输入新的数学成绩: ");
+    double new_math;
+    scanf("%lf", &new_math);
+    alter_all(list, &new_math, name, cmp_by_name, opt_math);
+}
+
+void chg_english(char *name)
+{
+    printf("请输入新的英语成绩: ");
+    double new_english;
+    scanf("%lf", &new_english);
+    alter_all(list, &new_english, name, cmp_by_name, opt_english);
+}
+
+void chg_whole(char *name)
+{
+    system("clear");
+    printf("请移步到主菜单先删除再录入新的数据^_^\n");
+    sleep(3);
 }
 
 void save_student()
@@ -207,6 +485,7 @@ void load_student()
     if (fp == NULL)
     {
         printf("打开文件(%s)失败", path);
+        exit(1);
     }
 
     int size;
@@ -221,6 +500,17 @@ void load_student()
     }
 
     fclose(fp);
+}
+
+void travel_student()
+{
+    for_each(list, print);
+}
+
+void print(void *data)
+{
+    Student stu = *(Student *)data;
+    printf("%u\t%s\t%s\t%.2lf\t%.2lf\t%.2lf\n", stu.id, stu.name, stu.cls, stu.c_score, stu.math, stu.english);
 }
 
 void show_menu()
@@ -248,5 +538,51 @@ void delete_menu()
     printf("*********2.根据姓名删除*********\n");
     printf("*********3.根据班级删除*********\n");
     printf("*********0.返回主菜单*********\n");
+    printf("*********请输入选项*************\n");
+}
+void search_menu()
+{
+    printf("*********功能列表********\n");
+    printf("*********1.根据学号查找*********\n");
+    printf("*********2.根据姓名查找*********\n");
+    printf("*********3.根据班级查找*********\n");
+    printf("*********0.返回主菜单*********\n");
+    printf("*********请输入选项*************\n");
+}
+
+void modify_menu()
+{
+    printf("*********功能列表********\n");
+    printf("*********1.根据学号修改*********\n");
+    printf("*********2.根据姓名修改*********\n");
+    printf("*********0.返回主菜单*********\n");
+    printf("*********请输入选项*************\n");
+}
+
+void alter_menu()
+{
+    printf("*********功能列表********\n");
+    printf("*********1.修改学号*********\n");
+    printf("*********2.修改姓名*********\n");
+    printf("*********3.修改班级*********\n");
+    printf("*********4.修改C语言成绩*********\n");
+    printf("*********5.修改数学升级*********\n");
+    printf("*********6.修改英语成绩*********\n");
+    printf("*********7.修改所有信息*********\n");
+    printf("*********0.返回上一级菜单*********\n");
+    printf("*********请输入选项*************\n");
+}
+
+void chg_menu()
+{
+    printf("*********功能列表********\n");
+    printf("*********1.修改学号*********\n");
+    printf("*********2.修改姓名*********\n");
+    printf("*********3.修改班级*********\n");
+    printf("*********4.修改C语言成绩*********\n");
+    printf("*********5.修改数学升级*********\n");
+    printf("*********6.修改英语成绩*********\n");
+    printf("*********7.修改所有信息*********\n");
+    printf("*********0.返回上一级菜单*********\n");
     printf("*********请输入选项*************\n");
 }
