@@ -36,7 +36,7 @@ void run()
             break;
         case '5':
             // 浏览
-            printf("%s\t%s\t%s\t%s\t%s\t%s\n", "学号", "姓名", "班级", "C语言", "数学", "英语");
+            printf("%s\t\t%s\t%s\t%s\t%s\t%s\n", "学号", "姓名", "班级", "C语言", "数学", "英语");
             travel_student();
             system("read -p \"按回车继续\"");
             break;
@@ -510,7 +510,7 @@ void travel_student()
 void print(void *data)
 {
     Student stu = *(Student *)data;
-    printf("%u\t%s\t%s\t%.2lf\t%.2lf\t%.2lf\n", stu.id, stu.name, stu.cls, stu.c_score, stu.math, stu.english);
+    printf("%010u\t%s\t%s\t%.2lf\t%.2lf\t%.2lf\n", stu.id, stu.name, stu.cls, stu.c_score, stu.math, stu.english);
 }
 
 void show_menu()
