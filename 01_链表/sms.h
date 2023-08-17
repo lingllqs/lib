@@ -15,12 +15,24 @@ typedef struct Student
 
 void run();
 void show_menu();
+void delete_menu();
 
-void add_student(List *list);
-void delete_student(List *list);
-void search_student(List *list);
-void modify_student(List *list);
-void travel_student(List *list);
+void add_student();
+void delete_student();
+void search_student();
+void modify_student();
+void travel_student();
+
+int cmp_by_id(void *dest, void *src);
+int cmp_by_name(void *dest, void *src);
+int cmp_by_class(void *dest, void *src);
+
+void delete_by_id();
+void delete_by_name();
+void delete_by_class();
+
+void save_student();
+void load_student();
 
 void print(void *data);
 

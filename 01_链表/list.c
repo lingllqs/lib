@@ -62,7 +62,7 @@ int push_head(List *list, void *data)
 
 int push_back(List *list, void *data)
 {
-    ERRP(list == NULL || data == NULL, push_back, return -1);
+    ERRP(list == NULL || data == NULL, push_back, goto ERR1);
 
     Node *new_node = node_new(data, list->type_size);
 
@@ -79,6 +79,9 @@ int push_back(List *list, void *data)
 
     list->size++;
     return 0;
+
+ERR1:
+    exit(2);
 }
 
 int pop_head(List *list)
