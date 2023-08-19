@@ -47,10 +47,10 @@ int main()
     push_back(list, &data5);
     for_each(list, print);
 
-    /* puts("\n删除后:"); */
-    /* int key = 17; */
-    /* pop_key(list, &key, cmp_age); */
-    /* for_each(list, print); */
+    puts("\n删除后:");
+    int key = 17;
+    pop_key(list, &key, cmp_age);
+    for_each(list, print);
 
     /* puts("\n查找"); */
     /* int val = 18; */
