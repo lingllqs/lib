@@ -2,4 +2,5 @@ a.out
 *.a
 *.so
 *.exe
+01_sms/*.txt
 **/target
