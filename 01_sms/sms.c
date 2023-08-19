@@ -36,15 +36,11 @@ void run()
             break;
         case '5':
             // 浏览
-            printf(
-                "+---------------+---------------+---------------+---------------+---------------+---------------+\n");
-            printf("| %s\t\t| %s\t\t| %s\t\t| %s\t\t| %s\t\t| %s\t\t|\n", "学号", "姓名", "班级", "编程", "数学",
-                   "英语");
-            printf(
-                "+---------------+---------------+---------------+---------------+---------------+---------------+\n");
+            printf("+---------------+---------------+---------------+---------------+---------------+---------------+\n");
+            printf("| %s\t\t| %s\t\t| %s\t\t| %s\t\t| %s\t\t| %s\t\t|\n", "学号", "姓名", "班级", "编程", "数学", "英语");
+            printf("+---------------+---------------+---------------+---------------+---------------+---------------+\n");
             travel_student();
-            printf(
-                "+---------------+---------------+---------------+---------------+---------------+---------------+\n");
+            printf("+---------------+---------------+---------------+---------------+---------------+---------------+\n");
             system("read -p \"按回车继续\"");
             break;
         case '6':
@@ -478,8 +474,7 @@ void save_student()
     for (i = 0; i < list->size; i++)
     {
         Student *stu = (Student *)p->data;
-        fprintf(fp, "%-10u %-10s %-10s %6.2lf %6.2lf %6.2lf\n", stu->id, stu->name, stu->cls, stu->c_score, stu->math,
-                stu->english);
+        fprintf(fp, "%-10u %-10s %-10s %6.2lf %6.2lf %6.2lf\n", stu->id, stu->name, stu->cls, stu->c_score, stu->math, stu->english);
         p = p->next;
     }
 
@@ -519,8 +514,7 @@ void travel_student()
 void print(void *data)
 {
     Student stu = *(Student *)data;
-    printf("| %-14u| %-s    \t| %-s    \t| %-12.2lf\t| %-12.2lf\t| %-12.2lf\t|\n", stu.id, stu.name, stu.cls,
-           stu.c_score, stu.math, stu.english);
+    printf("| %-14u| %-s    \t| %-s    \t| %-12.2lf\t| %-12.2lf\t| %-12.2lf\t|\n", stu.id, stu.name, stu.cls, stu.c_score, stu.math, stu.english);
 }
 
 void flush_input()

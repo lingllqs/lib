@@ -4,14 +4,14 @@
 #include <stdio.h>
 
 /* 错误处理宏 */
-#define ERRP(condition, message, process)                                                                              \
-    do                                                                                                                 \
-    {                                                                                                                  \
-        if (condition)                                                                                                 \
-        {                                                                                                              \
-            fprintf(stderr, #message " false!");                                                                       \
-            process;                                                                                                   \
-        }                                                                                                              \
+#define ERRP(condition, message, process)                                                                                                                                          \
+    do                                                                                                                                                                             \
+    {                                                                                                                                                                              \
+        if (condition)                                                                                                                                                             \
+        {                                                                                                                                                                          \
+            fprintf(stderr, #message " false!");                                                                                                                                   \
+            process;                                                                                                                                                               \
+        }                                                                                                                                                                          \
     } while (0);
 
 // 结点
