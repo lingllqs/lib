@@ -2,5 +2,6 @@ a.out
 *.a
 *.so
 *.exe
+*.log
 01_sms/*.txt
 **/target

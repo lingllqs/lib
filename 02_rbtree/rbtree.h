@@ -1,6 +1,7 @@
 #ifndef RBTREE_H
 #define RBTREE_H
 
+
 typedef enum
 {
     SUCCESS,
