@@ -3,5 +3,6 @@ a.out
 *.so
 *.exe
 *.log
+*.zip
 01_sms/*.txt
 **/target
