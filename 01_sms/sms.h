@@ -14,7 +14,7 @@ typedef struct Student
 } Student;
 
 void run();         // 运行系统
-void show_menu();   // 主菜单
+void main_menu();   // 主菜单
 void delete_menu(); // 删除菜单
 void search_menu(); // 查找菜单
 void modify_menu(); // 修改菜单
