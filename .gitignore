@@ -4,5 +4,4 @@
 *.exe
 *.log
 *.zip
-01_sms/*.txt
 **/target
